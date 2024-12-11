@@ -49,3 +49,13 @@ $ k  config set-context wayne --cluster=minikube  --user=wayne
 Switch context
 $ kubectl config use-context wayne
 $ k config current-context
+
+Verify Role Binding 
+$ k auth whoami
+TTRIBUTE   VALUE
+Username    minikube-user
+Groups      [system:masters system:authenticated]
+$ k auth  can-i delete pod --as=wayne
+yes
+$ k auth  can-i delete rs --as=wayne
+no
