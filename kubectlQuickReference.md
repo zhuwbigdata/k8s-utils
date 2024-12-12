@@ -1,6 +1,6 @@
-Quick reference on kubectl
+# Quick reference on kubectl
 
-kubectl api-resources
+## kubectl api-resources
 
 kubectl api-resources --namespaced=true      # All namespaced resources
 
@@ -14,6 +14,6 @@ kubectl api-resources --verbs=list,get       # All resources that support the "l
 
 kubectl api-resources --api-group=extensions # All resources in the "extensions" API group
 
-# To get verbs for a specific resource
+### To get verbs for a specific resource
 
 kubectl api-resources -o wide | grep pv 
