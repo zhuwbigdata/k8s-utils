@@ -64,6 +64,7 @@ $  k get pod coredns-77d6fd4654-vcgjw -n kube-system -o yaml | grep -A10 -i owne
     name: coredns-77d6fd4654
     uid: de99d129-f73d-4313-8974-da0c32dbd2ad
 
-k get pod -n kube-system -o jsonpath='{.items[*].metadata.ownerReferences[*].kind}' 
+$ k get pod -n kube-system -o jsonpath='{.items[*].metadata.ownerReferences[*].kind}' 
+$ k get pod -n kube-system -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.metadata.ownerReferences[*].kind}{"\n"}{end}'
 ```
 
