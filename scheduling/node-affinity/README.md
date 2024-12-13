@@ -1,8 +1,7 @@
-# Node Affinity
+## Node Affinity
 
-## Affinity declaration
 
-### Location
+### YAML Path 
 
 #### Pod 
 
