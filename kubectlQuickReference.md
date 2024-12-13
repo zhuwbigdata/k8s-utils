@@ -17,3 +17,6 @@ kubectl api-resources --api-group=extensions # All resources in the "extensions"
 ### To get verbs for a specific resource
 
 kubectl api-resources -o wide | grep pv 
+
+##  kubectl get
+kubectl get nodes -o json | jq -c 'paths|join(".")'

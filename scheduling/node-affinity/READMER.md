@@ -4,7 +4,14 @@
 
 ### Location
 
-under Pod/spec or Deployment/spec/template/spec
+#### Pod 
+
+.spec.affinity.nodeAffinity
+
+#### Deployment
+
+.spec.template.spec.affinity.nodeAffinity
+
 
 ### YAML 
 
