@@ -19,4 +19,11 @@ k top nodes
 k top pods
 ```
 
+## Logs
 
+```
+kubectl logs -f my-pod   
+kubectl logs -l name=myLabel -c my-container
+kubectl logs my-pod --previous  
+
+```
