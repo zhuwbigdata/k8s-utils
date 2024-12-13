@@ -1,7 +1,6 @@
 ## Node Name
 
-Works even when kube-scheduler is down.
- 
+Manual scheduling even when kube-scheduler is down. 
 
 ### YAML Path 
 
@@ -9,7 +8,7 @@ Works even when kube-scheduler is down.
 
 .spec.nodeName
 
-#### Deployment
+#### Deployment (multiple pods on the same node, not recommended)
 
 .spec.template.spec.nodeName
 
