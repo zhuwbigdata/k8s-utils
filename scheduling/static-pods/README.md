@@ -2,6 +2,12 @@
 
 Controlled by kubelet.
 
+
+
+
+
+
+
 ### Config Path
 
 $ ps -ef | grep kubelet
@@ -13,6 +19,8 @@ Look for '--config=/var/lib/kubelet/config.yaml' parameter.
 ```
 staticPodPath: /etc/kubernetes/manifests
 ```
+Note: kubelet will process all files in the /etc/kubernetes/manifests directory, regardless of their file extension, as long as they contain valid YAML or JSON content that can be interpreted as a Pod manifest.
+So if make a copy, copy to other locations
 
 ### Imperative commands
 
