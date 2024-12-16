@@ -49,7 +49,10 @@ Alway check if the same ingress rules does not get applied in two different name
 There is no issues on the apply since ingress is scoped based on name space.
 However, the behavior depends on the ingress controller, such as NGINX IC will pick instead of another.
 
-
+#### Annotations
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
 
 
 #### Rules
