@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: pod2
+  name: pod2
+spec:
+  nodeName: macbeth
+  containers:
+  - image: httpd:2.4.41-alpine
+    name: pod2
