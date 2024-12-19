@@ -30,10 +30,13 @@ The **Pod CIDR range** specifies the IP range for Pods in the cluster. This rang
    - If you're using a specific CNI plugin (e.g., Calico, Flannel), the Pod CIDR range is defined in the CNI configuration.
    - Look at the CNI plugin's configuration file (usually in `/etc/cni/net.d/` on the nodes).
 
-3. **Check API Server Parameters**:
-   - The Pod CIDR range might also be defined in the cluster's API server configuration.
-   - Look for the `--cluster-cidr` flag in the API server or controller-manager configurations.
+3. **Check Controller Manager  Parameters**:
+   ```
+   $ cd /etc/kubernetes/manifest
+   $ grep -i cidr *.yaml
 
+   Look for 'cluster-cidr' for range and 'allocate-node-cidrs' flag
+   ```    
 ---
 
 ### **2. Service CIDR Range**
