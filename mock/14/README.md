@@ -1,4 +1,5 @@
 ##Question 14 | Find out Cluster Information
+
 Use context: kubectl config use-context k8s-c1-H
 You're ask to find out following information about the cluster k8s-c1-H :
 1. How many controlplane nodes are available?
@@ -15,6 +16,7 @@ cd /etc/kubernetes/manifests/
 
 sudo grep range kube-apiserver.yaml
     - --service-cluster-ip-range=10.96.0.0/12
+```
 
 ###Node CIDR and CNI provider
 
@@ -65,6 +67,7 @@ sudo grep cidr kube-controller-manager.yaml
 ```
 
 ###ConfigMap in kube-system
+
 ```
 kubectl get cm -n kube-system
 NAME                                                   DATA   AGE
