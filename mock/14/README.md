@@ -1,4 +1,4 @@
-##Question 14 | Find out Cluster Information
+## Question 14 | Find out Cluster Information
 
 Use context: kubectl config use-context k8s-c1-H
 You're ask to find out following information about the cluster k8s-c1-H :
@@ -8,7 +8,7 @@ You're ask to find out following information about the cluster k8s-c1-H :
 4. Which Networking (or CNI Plugin) is configured and where is its config file?
 5. Which suffix will static pods have that run on cluster1-node1 ?
 
-###Service CIDR
+### Service CIDR
 
 ```
 ssh -n macbeth -p macbeth
@@ -18,7 +18,7 @@ sudo grep range kube-apiserver.yaml
     - --service-cluster-ip-range=10.96.0.0/12
 ```
 
-###Node CIDR and CNI provider
+### Node CIDR and CNI provider
 
 ```
 cd /etc/cni/net.d
@@ -66,7 +66,7 @@ sudo grep cidr kube-controller-manager.yaml
 
 ```
 
-###ConfigMap in kube-system
+### ConfigMap in kube-system
 
 ```
 kubectl get cm -n kube-system
