@@ -18,10 +18,11 @@ sudo grep range kube-apiserver.yaml
     - --service-cluster-ip-range=10.96.0.0/12
 ```
 
-### POD CIDR and CNI provider
+### POD CIDR and CNI provider per Node
 
 ```
 cd /etc/cni/net.d
+
 
 cat 10-kindnet.conflist
 {
@@ -41,8 +42,9 @@ cat 10-kindnet.conflist
 			],
 			"ranges": [
 
-
-				[ { "subnet": "10.244.0.0/24" } ]
+        # only one line per node
+				[ { "subnet": "10.244.0.0/24" } ]  # node 1
+				[ { "subnet": "10.244.1.0/24" } ]  # node 2
 			]
 		}
 		,
