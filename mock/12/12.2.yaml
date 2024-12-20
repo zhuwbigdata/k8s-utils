@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    id: very-important # change
+  name: deploy-important
+  namespace: project-tiger # important
+spec:
+  replicas: 3 # change
+  selector:
+    matchLabels:
+      id: very-important # change
+  template:
+    metadata:
+      labels:
+        id: very-important # change
+    spec:
+      containers:
+      - image: nginx:1.17.6-alpine
+        name: container1 # change
+      - image: google/pause # add
+        name: container2 # add
+topologySpreadConstraints: # add
+- maxSkew: 1 # add
+topologyKey: kubernetes.io/hostname # add
+whenUnsatisfiable: DoNotSchedule # add
+labelSelector: # add
+matchLabels: # add
+id: very-important # add
