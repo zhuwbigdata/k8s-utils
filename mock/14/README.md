@@ -18,7 +18,7 @@ sudo grep range kube-apiserver.yaml
     - --service-cluster-ip-range=10.96.0.0/12
 ```
 
-### Node CIDR and CNI provider
+### POD CIDR and CNI provider
 
 ```
 cd /etc/cni/net.d
