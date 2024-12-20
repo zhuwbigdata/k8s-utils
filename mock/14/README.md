@@ -85,9 +85,7 @@ Labels:       <none>
 Annotations:  <none>
 
 Data
-====
 ClusterConfiguration:
-----
 apiServer:
   certSANs:
   - 127.0.0.1
@@ -128,12 +126,7 @@ scheduler:
   extraArgs:
   - name: leader-elect
     value: "false"
-
-
-
 BinaryData
-====
-
 Events:  <none>
 ```
 
