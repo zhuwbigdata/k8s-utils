@@ -2,28 +2,31 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    id: very-important # change
+    id: very-important 
   name: deploy-important
-  namespace: project-tiger # important
+  namespace: project-tiger 
 spec:
-  replicas: 3 # change
+  replicas: 3 
   selector:
     matchLabels:
-      id: very-important # change
+      id: very-important 
   template:
     metadata:
       labels:
-        id: very-important # change
+        id: very-important 
     spec:
       containers:
       - image: nginx:1.17.6-alpine
-        name: container1 # change
-      - image: google/pause # add
-        name: container2 # add
-topologySpreadConstraints: # add
-- maxSkew: 1 # add
-topologyKey: kubernetes.io/hostname # add
-whenUnsatisfiable: DoNotSchedule # add
-labelSelector: # add
-matchLabels: # add
-id: very-important # add
+        name: container1 
+      - image: curlimages/curl
+        name: container2
+        command:
+        - sleep
+        - "4800"
+      topologySpreadConstraints: 
+      - maxSkew: 1 
+        topologyKey: kubernetes.io/hostname 
+        whenUnsatisfiable: DoNotSchedule 
+        labelSelector: 
+          matchLabels: 
+            id: very-important 
