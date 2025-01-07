@@ -12,6 +12,24 @@ $ openssl req -text -noout -verify -in wayne.csr | grep Subject
 
 ### Encode CSR with base64 and create wayne-csr.yaml 
 
+```
+cat <<EOF | kubectl apply -f -
+apiVersion: certificates.k8s.io/v1
+kind: CertificateSigningRequest
+metadata:
+  name: csr-name
+spec:
+  request:  base64-encoded-csr
+  signerName: kubernetes.io/kube-apiserver-client
+  expirationSeconds: 86400  # one day
+  usages:
+  - client auth
+EOF
+
+```
+
+
+
 usages has to be 'client auth'
 
 expirationSeconds could be made longer (i.e. 864000 for ten days) or shorter (i.e. 3600 for one hour)
@@ -50,21 +68,30 @@ NAME    AGE     SIGNERNAME                            REQUESTOR       REQUESTEDD
 
 wayne   2m23s   kubernetes.io/kube-apiserver-client   minikube-user   30d                 Approved,Issued
 
-### Create Role and RoleBinding
+### Create Role and RoleBinding - namespaced 
 
-$ k api-resources 
+$ k api-resources --namespaced=true | grep role
+rolebindings                             rbac.authorization.k8s.io/v1   true         RoleBinding
+roles                                    rbac.authorization.k8s.io/v1   true         Role
 
-$ k create role developer --verb=create,get,list,update,delete --resource=pods,deployments
+$ k create role developer --verb=create,get,list,update,delete --resource=pods,deployments --namespace=developement
 
-$ k get role developer -o yaml
+$ k get role developer  --namespace=developement -o yaml 
 
-$ k create rolebinding developer-rb-wayne --role=developer --user=wayne --group=developers
+$ k create rolebinding developer-rb-developers --role=developer  --group=developers  --namespace=developement
+$ k create rolebinding developer-rb-wayne --role=developer --user=wayne  --namespace=developement
 
-$ k get rolebindings.rbac.authorization.k8s.io developer-rb-wayne  -o wide
+$ k get rolebindings.rbac.authorization.k8s.io  -n developement -o wide
+NAME                      ROLE             AGE   USERS   GROUPS       SERVICEACCOUNTS
+developer-rb-developers   Role/developer   26s           developers
+developer-rb-wayne        Role/developer   20s   wayne
 
-NAME                 ROLE             AGE   USERS   GROUPS       SERVICEACCOUNTS
+### Verfy
 
-developer-rb-wayne   Role/developer   21s   wayne   developers
+$ k auth can-i list pods --as=wayne -n developement
+$ k auth can-i list pods --as=wayne --as-group=developers -n developement
+
+
 
 ### Add credentials
 
@@ -72,13 +99,18 @@ $ k config set-credentials wayne --client-key=wayne.key --client-certificate=way
 
 $ k config view -o jsonpath='{.clusters[*].name}'
 
-$ k  config set-context wayne --cluster=minikube  --user=wayne
+$ k  config set-context wayne --cluster=macbeth  --user=wayne
 
 ### Switch context
 
 $ kubectl config use-context wayne
 
 $ k config current-context
+
+### View current context only  
+
+kubectl config view --minify
+
 
 ### Verify Role Binding 
 
