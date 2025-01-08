@@ -86,14 +86,23 @@ NAME                      ROLE             AGE   USERS   GROUPS       SERVICEACC
 developer-rb-developers   Role/developer   26s           developers
 developer-rb-wayne        Role/developer   20s   wayne
 
-### Verfy
+### Verify
 
 $ k auth can-i list pods --as=wayne -n developement
+
 $ k auth can-i list pods --as=wayne --as-group=developers -n developement
 
 
 
-### Add credentials
+### Add credentials per cluster 
+
+Note: client certificate is signed for the cluster specific CA, so the client private key is the same, but
+the client certificate is different.
+
+Notes: there is no k8s CLI commands to list all the users defined in a cluster, but we can infer with:
+$ k get csr
+$ k get rolebindings --all-namespaces -o yaml
+$ k get clusterrolebindings -o yaml 
 
 $ k config set-credentials wayne --client-key=wayne.key --client-certificate=wayne.crt --embed-certs=true
 
